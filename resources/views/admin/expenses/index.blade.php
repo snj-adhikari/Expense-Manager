@@ -38,6 +38,9 @@
                             {{ trans('cruds.expense.fields.description') }}
                         </th>
                         <th>
+                            {{ trans('cruds.expense.fields.created_by') }}
+                        </th>
+                        <th>
                             &nbsp;
                         </th>
                     </tr>
@@ -64,19 +67,22 @@
                                 {{ $expense->description ?? '' }}
                             </td>
                             <td>
-                                @can('expense_show')
+                                {{ $expense->created_by ? $expense->created_by->name : '' }}
+                            </td>
+                            <td>
+                                @can('expense_show', $expense)
                                     <a class="btn btn-xs btn-primary" href="{{ route('admin.expenses.show', $expense->id) }}">
                                         {{ trans('global.view') }}
                                     </a>
                                 @endcan
 
-                                @can('expense_edit')
+                                @can('expense_edit', $expense)
                                     <a class="btn btn-xs btn-info" href="{{ route('admin.expenses.edit', $expense->id) }}">
                                         {{ trans('global.edit') }}
                                     </a>
                                 @endcan
 
-                                @can('expense_delete')
+                                @can('expense_delete', $expense)
                                     <form action="{{ route('admin.expenses.destroy', $expense->id) }}" method="POST" onsubmit="return confirm('{{ trans('global.areYouSure') }}');" style="display: inline-block;">
                                         <input type="hidden" name="_method" value="DELETE">
                                         <input type="hidden" name="_token" value="{{ csrf_token() }}">

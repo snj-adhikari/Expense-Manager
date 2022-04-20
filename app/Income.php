@@ -9,7 +9,8 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Income extends Model
 {
-    use SoftDeletes, MultiTenantModelTrait;
+    // use SoftDeletes, MultiTenantModelTrait; // commenting out multi tenant model trait
+    use SoftDeletes;
 
     public $table = 'incomes';
 

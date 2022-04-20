@@ -23,8 +23,20 @@ class AuthGates
             }
 
             foreach ($permissionsArray as $title => $roles) {
-                Gate::define($title, function (\App\User $user) use ($roles) {
-                    return count(array_intersect($user->roles->pluck('id')->toArray(), $roles)) > 0;
+                Gate::define($title, function (\App\User $user , $post = null) use ($roles, $title ) {
+                    $current_roles = $user->roles->pluck('id')->toArray();
+                    $count_in_permission = count(array_intersect($current_roles, $roles)) > 0;
+                    if( $title === 'expense_delete' || $title === 'expense_edit' || $title === 'income_delete' || $title === 'income_edit') :
+                        $is_admin = in_array( 1, $current_roles );
+                        if( $post && !$is_admin ) {
+                            return $post->created_by_id === $user->id && $count_in_permission;
+                        } else {
+                            return $count_in_permission;
+                        }
+                        
+                    else : 
+                        return $count_in_permission;
+                    endif;
                 });
             }
         }
