@@ -2,7 +2,7 @@
 
 Route::redirect('/', '/login');
 Route::redirect('/home', '/admin');
-Auth::routes();
+Auth::routes(['register' => false]);
 
 Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'middleware' => ['auth']], function () {
     Route::redirect('/', '/admin/expenses');
