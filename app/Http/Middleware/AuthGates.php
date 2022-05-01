@@ -29,7 +29,7 @@ class AuthGates
                     if( $title === 'expense_delete' || $title === 'expense_edit' || $title === 'income_delete' || $title === 'income_edit') :
                         $is_admin = in_array( 1, $current_roles );
                         if( $post && !$is_admin ) {
-                            return $post->created_by_id === $user->id && $count_in_permission;
+                            return $post->created_by_id == $user->id && $count_in_permission;
                         } else {
                             return $count_in_permission;
                         }

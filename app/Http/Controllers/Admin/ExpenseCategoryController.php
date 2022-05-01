@@ -72,7 +72,7 @@ class ExpenseCategoryController extends Controller
 
     public function massDestroy(MassDestroyExpenseCategoryRequest $request)
     {
-        ExpenseCategory::whereIn('id', request('ids'))->delete();
+        ExpenseCategory::whereIn('id', request('ids'))->where('created_by_id', '=', auth()->user()->id)->delete();
 
         return response(null, Response::HTTP_NO_CONTENT);
     }

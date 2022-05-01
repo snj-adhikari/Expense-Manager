@@ -19,11 +19,11 @@ trait MultiTenantModelTrait
                     $model->created_by_id = auth()->id();
                 // }
             });
-            if (!$isAdmin) {
-                static::addGlobalScope('created_by_id', function (Builder $builder) {
-                    $builder->where('created_by_id', auth()->id())->orWhereNull('created_by_id');
-                });
-            }
+            // if (!$isAdmin) {
+            //     static::addGlobalScope('created_by_id', function (Builder $builder) {
+            //         $builder->where('created_by_id', auth()->id())->orWhereNull('created_by_id');
+            //     });
+            // }
         }
     }
 }
