@@ -14,7 +14,7 @@ trait MultiTenantModelTrait
             static::creating(function ($model) use ($isAdmin) {
 // Prevent admin from setting his own id - admin entries are global.
 
-// If required, remove the surrounding IF condition and admins will act as users
+// If required, uncomment  the surrounding IF condition and admins will act different than users
                 // if (!$isAdmin) {
                     $model->created_by_id = auth()->id();
                 // }

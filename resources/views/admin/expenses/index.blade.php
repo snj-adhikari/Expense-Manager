@@ -67,7 +67,7 @@
                                 {{ $expense->description ?? '' }}
                             </td>
                             <td>
-                                {{ $expense->created_by ? $expense->created_by->name : '' }}
+                                {{ $expense->created_by ? $expense->created_by->name : ' -- ' }}
                             </td>
                             <td>
                                 @can('expense_show', $expense)
